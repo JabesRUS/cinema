@@ -12,7 +12,7 @@ CREATE TABLE "session" (id serial PRIMARY KEY,
 						price numeric(10, 2));
 						
 CREATE TABLE ticket (id serial PRIMARY KEY,
-					plase_id int REFERENCES place(id),
+					place_id int REFERENCES place(id),
 					session_id int REFERENCES session(id),
 					is_bought BOOLEAN NOT NULL);
 
