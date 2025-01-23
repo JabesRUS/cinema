@@ -32,7 +32,7 @@ public class MovieRepository {
         Movie movie = new Movie();
         movie.setId(rs.getInt("id"));
         movie.setName(rs.getString("name"));
-        movie.setDescription("description");
+        movie.setDescription(rs.getString("description"));
         return movie;
     }
 }
