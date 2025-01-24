@@ -8,7 +8,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,6 +19,25 @@ import java.util.Optional;
 public class SessionRepository {
     private final JdbcTemplate jdbcTemplate;
     private final MovieRepository movieRepository;
+
+    public Session save(Session session) {
+        String sql = """
+                INSERT INTO session (movie_id, date_time, price) VALUES (?,?, ?) RETURNING id;
+                """;
+        Integer movieId = session.getMovie().getId();
+        LocalDateTime dateTime = session.getDateTime();
+        BigDecimal price = session.getPrice();
+
+        Integer createdId = jdbcTemplate.queryForObject(sql, Integer.class, movieId, dateTime, price);
+        session.setId(createdId);
+
+        return session;
+    }
+
+    public List<Session> selectAll() {
+        String sql = "SELECT * FROM session;";
+        return jdbcTemplate.query(sql, this::mapToSession);
+    }
 
     public Optional<Session> findById(Integer id) {
         String sql = """
@@ -36,7 +58,7 @@ public class SessionRepository {
     private Session mapToSession(ResultSet rs, int rowNum) {
         Session session = new Session();
         session.setId(rs.getInt("id"));
-        session.setDateTime(rs.getTimestamp("time").toLocalDateTime());
+        session.setDateTime(rs.getTimestamp("date_time").toLocalDateTime());
         session.setPrice(rs.getBigDecimal("price"));
 
         if (rs.getString("movie_id") != null) {

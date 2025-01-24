@@ -8,7 +8,7 @@ CREATE TABLE place (id serial PRIMARY KEY,
 					
 CREATE TABLE "session" (id serial PRIMARY KEY,
 						movie_id int REFERENCES movie(id),
-						time varchar(10),
+						time timestamp(10),
 						price numeric(10, 2));
 						
 CREATE TABLE ticket (id serial PRIMARY KEY,
