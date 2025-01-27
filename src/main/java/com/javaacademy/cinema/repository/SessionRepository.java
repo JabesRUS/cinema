@@ -21,15 +21,18 @@ public class SessionRepository {
     private final MovieRepository movieRepository;
 
     public Session save(Session session) {
-        String sql = """
-                INSERT INTO session (movie_id, date_time, price) VALUES (?,?, ?) RETURNING id;
-                """;
+
         Integer movieId = session.getMovie().getId();
         LocalDateTime dateTime = session.getDateTime();
         BigDecimal price = session.getPrice();
+        String sql = """
+                INSERT INTO session (movie_id, date_time, price)
+                VALUES (?, ?, ?)
+                RETURNING id;
+                """;
 
-        Integer createdId = jdbcTemplate.queryForObject(sql, Integer.class, movieId, dateTime, price);
-        session.setId(createdId);
+        Integer sessionId = jdbcTemplate.queryForObject(sql, Integer.class, movieId, dateTime, price);
+        session.setId(sessionId);
 
         return session;
     }

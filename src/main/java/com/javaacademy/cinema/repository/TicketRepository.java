@@ -10,14 +10,76 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class TicketRepository {
+    public static final String MESSAGE_NOT_FOUND_TICKET = "Билет по указанному id-%s не найден.";
+    public static final String MESSAGE_TICKET_SOLD_OUT = "Билет id: %s уже продан.";
     private final JdbcTemplate jdbcTemplate;
     private final PlaceRepository placeRepository;
     private final SessionRepository sessionRepository;
+
+    public List<Ticket> getUnsoldTickets() {
+        String sql = """
+                SELECT *
+                FROM ticket
+                WHERE is_bought = false
+                """;
+        List<Ticket> query = jdbcTemplate.query(sql, this::mapToTicket);
+
+        return query;
+    }
+
+    public List<Ticket> getSoldTickets() {
+        String sql = """
+                SELECT *
+                FROM ticket
+                WHERE is_bought = true
+                """;
+        List<Ticket> query = jdbcTemplate.query(sql, this::mapToTicket);
+
+        return query;
+    }
+
+    public void changeStatus(Integer id) {
+        Ticket ticket = findById(id).orElse(null);
+
+        if (ticket == null) {
+            throw new RuntimeException(MESSAGE_NOT_FOUND_TICKET.formatted(id));
+        }
+        if (ticket.getIsBought()) {
+            throw new RuntimeException(MESSAGE_TICKET_SOLD_OUT.formatted(id));
+        }
+
+        String sql = """
+                UPDATE ticket SET is_bought = true
+                WHERE id = ?;
+                """;
+
+        jdbcTemplate.update(sql, ps -> {
+            ps.setInt(1, id);
+        });
+
+    }
+
+    public Ticket save(Ticket ticket) {
+        Integer placeId = ticket.getPlace().getId();
+        Integer sessionId = ticket.getSession().getId();
+        Boolean isBought = ticket.getIsBought();
+        String sql = """
+                INSERT INTO ticket (place_id, session_id, is_bought)
+                VALUES (?, ?, ?) RETURNING id;
+                """;
+
+        Integer tickedId = jdbcTemplate.queryForObject(sql, Integer.class, placeId, sessionId, isBought);
+        ticket.setId(tickedId);
+
+        return ticket;
+
+    }
 
     public Optional<Ticket> findById(Integer id) {
         String sql = """
