@@ -8,12 +8,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class PlaceRepository {
     private final JdbcTemplate jdbcTemplate;
+
+    public List<Place> selectAll() {
+        String sql = """
+                SELECT * FROM place;
+                """;
+        return jdbcTemplate.query(sql, this::mapToPlace);
+    }
 
     public Optional<Place> findById(Integer id) {
         String sql = """

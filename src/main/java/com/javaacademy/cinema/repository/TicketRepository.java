@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Repository
@@ -45,7 +46,8 @@ public class TicketRepository {
     }
 
     public void changeStatus(Integer id) {
-        Ticket ticket = findById(id).orElseThrow();
+        Ticket ticket = findById(id)
+                .orElseThrow(() -> new NoSuchElementException(MESSAGE_NOT_FOUND_TICKET.formatted(id)));
 
 //        if (ticket == null) {
 //            throw new RuntimeException(MESSAGE_NOT_FOUND_TICKET.formatted(id));
