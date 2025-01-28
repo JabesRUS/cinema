@@ -45,11 +45,11 @@ public class TicketRepository {
     }
 
     public void changeStatus(Integer id) {
-        Ticket ticket = findById(id).orElse(null);
+        Ticket ticket = findById(id).orElseThrow();
 
-        if (ticket == null) {
-            throw new RuntimeException(MESSAGE_NOT_FOUND_TICKET.formatted(id));
-        }
+//        if (ticket == null) {
+//            throw new RuntimeException(MESSAGE_NOT_FOUND_TICKET.formatted(id));
+//        }
         if (ticket.getIsBought()) {
             throw new RuntimeException(MESSAGE_TICKET_SOLD_OUT.formatted(id));
         }
