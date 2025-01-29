@@ -5,10 +5,7 @@ import com.javaacademy.cinema.entity.Movie;
 import com.javaacademy.cinema.mapper.MovieMapper;
 import com.javaacademy.cinema.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 

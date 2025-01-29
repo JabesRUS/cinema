@@ -29,9 +29,9 @@ public class TicketRepository {
                 FROM ticket
                 WHERE is_bought = false
                 """;
-        List<Ticket> query = jdbcTemplate.query(sql, this::mapToTicket);
 
-        return query;
+        return jdbcTemplate.query(sql, this::mapToTicket);
+
     }
 
     public List<Ticket> getSoldTickets() {
@@ -40,9 +40,7 @@ public class TicketRepository {
                 FROM ticket
                 WHERE is_bought = true
                 """;
-        List<Ticket> query = jdbcTemplate.query(sql, this::mapToTicket);
-
-        return query;
+        return jdbcTemplate.query(sql, this::mapToTicket);
     }
 
     public void changeStatus(Integer id) {

@@ -1,18 +1,7 @@
 package com.javaacademy.cinema;
 
-import com.javaacademy.cinema.entity.Movie;
-import com.javaacademy.cinema.entity.Place;
-import com.javaacademy.cinema.entity.Session;
-import com.javaacademy.cinema.entity.Ticket;
-import com.javaacademy.cinema.repository.MovieRepository;
-import com.javaacademy.cinema.repository.SessionRepository;
-import com.javaacademy.cinema.repository.TicketRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class CinemaApplication {
