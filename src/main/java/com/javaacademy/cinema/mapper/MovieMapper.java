@@ -11,4 +11,9 @@ public class MovieMapper {
                 movieDto.getName(),
                 movieDto.getDescription());
     }
+
+    public MovieDto movieToDto(Movie movie) {
+        return new MovieDto(movie.getName(),
+                movie.getDescription());
+    }
 }

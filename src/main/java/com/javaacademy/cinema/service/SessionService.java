@@ -11,6 +11,8 @@ import com.javaacademy.cinema.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -22,10 +24,22 @@ public class SessionService {
     private final PlaceRepository placeRepository;
     private final TicketRepository ticketRepository;
 
+    public List<String> getFreePlace(Integer idSession) {
+        return ticketRepository.getUnsoldTickets().stream()
+                .map(Ticket::getPlace)
+                .map(Place::getName)
+                .toList();
+    }
+
+    public List<Session> selectAll () {
+        return sessionRepository.selectAll();
+    }
+
     public Session save(SessionDto sessionDto) {
         Session session = sessionMapper.dtoToSession(sessionDto);
         Session sessionAfterSave = sessionRepository.save(session);
         List<Place> placeList = placeRepository.selectAll();
+
         placeList.stream()
                 .map(Place::getId)
                 .map(placeId -> new Ticket(null,
