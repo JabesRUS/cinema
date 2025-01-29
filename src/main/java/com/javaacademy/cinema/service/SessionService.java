@@ -23,12 +23,13 @@ public class SessionService {
 
     public List<String> getFreePlace(Integer idSession) {
         return ticketRepository.getUnsoldTickets().stream()
+                .filter(ticket -> ticket.getSession().getId().equals(idSession))
                 .map(Ticket::getPlace)
                 .map(Place::getName)
                 .toList();
     }
 
-    public List<Session> selectAll () {
+    public List<Session> selectAll() {
         return sessionRepository.selectAll();
     }
 

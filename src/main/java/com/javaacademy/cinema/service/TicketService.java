@@ -25,7 +25,8 @@ public class TicketService {
         Integer sessionId = bookingDto.getSessionId();
         String namePlace = bookingDto.getPlaceName();
 
-        Ticket foundTicket = Stream.concat(ticketRepository.getUnsoldTickets().stream(), ticketRepository.getSoldTickets().stream())
+        Ticket foundTicket = Stream.concat(ticketRepository.getUnsoldTickets().stream(),
+                        ticketRepository.getSoldTickets().stream())
                 .filter(ticket -> ticket.getSession().getId().equals(sessionId))
                 .filter(ticket -> ticket.getPlace().getName().equals(namePlace))
                 .findFirst()

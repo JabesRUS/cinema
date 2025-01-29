@@ -26,8 +26,8 @@ public class TickedController {
         try {
             return ResponseEntity.ok(ticketService.bookingTicket(bookingDto));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("Access Denied");
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("CONFLICT");
         }
 
     }

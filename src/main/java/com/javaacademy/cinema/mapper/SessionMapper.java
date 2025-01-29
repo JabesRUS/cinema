@@ -16,7 +16,8 @@ public class SessionMapper {
     private final MovieRepository movieRepository;
     public Session dtoToSession(SessionDto sessionDto) {
         Movie movie = movieRepository.findById(sessionDto.getMovieID())
-                .orElseThrow(() -> new NoSuchElementException(MESSAGE_NOT_FOUND_MOVIE.formatted(sessionDto.getMovieID())));
+                .orElseThrow(() ->
+                        new NoSuchElementException(MESSAGE_NOT_FOUND_MOVIE.formatted(sessionDto.getMovieID())));
         return new Session(null,
                 movie,
                 sessionDto.getDateTime(),
