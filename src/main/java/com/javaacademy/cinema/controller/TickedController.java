@@ -1,7 +1,6 @@
 package com.javaacademy.cinema.controller;
 
 import com.javaacademy.cinema.dto.BookingDto;
-import com.javaacademy.cinema.dto.TicketDto;
 import com.javaacademy.cinema.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

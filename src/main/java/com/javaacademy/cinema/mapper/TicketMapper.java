@@ -2,7 +2,6 @@ package com.javaacademy.cinema.mapper;
 
 import com.javaacademy.cinema.dto.TicketDto;
 import com.javaacademy.cinema.entity.Ticket;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
