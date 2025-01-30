@@ -1,7 +1,6 @@
 package com.javaacademy.cinema.controller;
 
 import com.javaacademy.cinema.dto.BookingDto;
-import com.javaacademy.cinema.entity.Session;
 import com.javaacademy.cinema.entity.Ticket;
 import com.javaacademy.cinema.service.TicketService;
 import io.swagger.v3.oas.annotations.Operation;

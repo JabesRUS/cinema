@@ -1,7 +1,6 @@
 package com.javaacademy.cinema.controller;
 
 import com.javaacademy.cinema.dto.SessionDto;
-import com.javaacademy.cinema.entity.Movie;
 import com.javaacademy.cinema.entity.Session;
 import com.javaacademy.cinema.service.SessionService;
 import io.swagger.v3.oas.annotations.Operation;

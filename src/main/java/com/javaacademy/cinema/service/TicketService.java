@@ -36,23 +36,6 @@ public class TicketService {
 
         return ticketMapper.ticketToDto(foundTicket);
 
-//        Optional<Place> findPlace = placeRepository.selectAll().stream()
-//                .filter(place -> place.getName().equals(namePlace))
-//                .findFirst();
-//        if (findPlace.isEmpty()){
-//            throw new RuntimeException("Место не найдено.")
-//        }
-//
-//        Integer placeid = findPlace.get().getId();
-
-
-//        ticketRepository.getUnsoldTickets().stream()
-//                .filter(ticket -> ticket.getSession().getId().equals(sessionId))
-//                .filter(ticket -> ticket.getPlace().getName().equals(namePlace))
-//                .findFirst()
-//                .ifPresent(ticket ->
-//                        ticketRepository.changeStatus(ticket.getId()));
-
     }
 
     public List<Ticket> getSoldTicket() {

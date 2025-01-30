@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "DTO билета при его успешной покупке, содержит id билета," +
-        " номер места, название фильма, дату сеанса")
+@Schema(description = "DTO билета при его успешной покупке, содержит id билета,"
+        + " номер места, название фильма, дату сеанса")
 public class TicketDto {
 
     @Schema(description = "id билета")
