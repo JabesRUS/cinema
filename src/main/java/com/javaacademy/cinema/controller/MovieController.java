@@ -44,7 +44,7 @@ public class MovieController {
     @Operation(summary = "Сохранение фильма в БД",
             description = "Название и описание фильма сохраняются в БД.",
     responses = {
-            @ApiResponse(responseCode = "200", description = "Фильм сохранен",
+            @ApiResponse(responseCode = "201", description = "Фильм сохранен",
             content = @Content(schema = @Schema(implementation = Movie.class))),
             @ApiResponse(responseCode = "403", description = "В доступе отказано.")
     })

@@ -34,7 +34,7 @@ public class TickedController {
     @Operation(summary = "Продажа билета",
             description = "Продажа билета по указанному id сеанса и номеру места",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Билет куплен",
+                    @ApiResponse(responseCode = "203", description = "Билет куплен",
                             content = @Content(schema = @Schema(implementation = BookingDto.class))),
                     @ApiResponse(responseCode = "409", description = "Конфликт, билет продан")
             })

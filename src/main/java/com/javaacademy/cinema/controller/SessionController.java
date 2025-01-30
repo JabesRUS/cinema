@@ -52,7 +52,7 @@ public class SessionController {
     @Operation(summary = "Сохранить сеанс в БД",
             description = "Передаются id фильма, дата сеанса и цена билета, далее создается новый сеанс в БД",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Сеанс сохранен в БД",
+                    @ApiResponse(responseCode = "201", description = "Сеанс сохранен в БД",
                             content = @Content(schema = @Schema(implementation = Session.class))),
                     @ApiResponse(responseCode = "403", description = "В доступе отказано.")
             })
